@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        input[type="text"] {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Update the action attribute to send data to your Node.js backend -->
+    <form action="/attendance" method="POST">
+        <h1>Attendance Form</h1>
+
+        <div class="form-group">
+            <label for="name">Name (Last, First, Middle Initial):</label>
+            <input type="text" id="name" name="name" placeholder="Last, First, M.I." required>
+        </div>
+
+        <div class="form-group">
+            <label for="set">Set:</label>
+            <input type="text" id="set" name="set" placeholder="Ex: Set A, B or C" required>
+        </div>
+
+        <div class="form-group">
+            <label for="subject">Subject:</label>
+            <input type="text" id="subject" name="subject" required>
+        </div>
+
+        <div class="form-group">
+            <label for="code">Code (4 digits):</label>
+            <input type="text" id="code" name="code" pattern="\d{4}" placeholder="XXXX" required>
+        </div>
+
+        <div class="form-group">
+            <label for="time">Time of Attendance:</label>
+            <input type="text" id="time" name="time" value="" readonly>
+        </div>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        // Automatically fill the time input with the current time
+        const timeInput = document.getElementById('time');
+        const now = new Date();
+        const formattedTime = now.getHours() + ":" + ('0' + now.getMinutes()).slice(-2);
+        timeInput.value = formattedTime;
+    </script>
+</body>
+</html>
